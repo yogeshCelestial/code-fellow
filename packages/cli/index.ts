@@ -3,11 +3,8 @@ import { Command } from "commander";
 import fs from 'fs';
 import path from "path";
 import { analyzeCode } from "./ai-prompt/index.js";
-import dotenv from 'dotenv';
 import chalk from "chalk";
 import _ from 'underscore';
-
-dotenv.config();
 
 const program = new Command();
 

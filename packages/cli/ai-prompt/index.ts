@@ -1,10 +1,22 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import "dotenv/config";
 
 // Access your API key as an environment variable (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI("AIzaSyCUSIrcgXWEN75tMQc4qEoudJfwQr6paGI");
+const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const analyzeCode = async (code: string) => {
+    const prompt = promptFunction(code);
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    let text = response.text();
+    text = text.replace("```json", "");
+    text = text.replace("```", "");
+    const respObj = JSON.parse(text);
+    return respObj;
+}
+
+function promptFunction (code: string): string {
     const prompt = `
                 Your role and goal is to be an AI smart code quality checker. Your job is to perform quality checks on given code.
                 Here is the code: ${code}
@@ -52,13 +64,7 @@ const analyzeCode = async (code: string) => {
                 ]
                     Thank You
                 `;
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let text = response.text();
-    text = text.replace("```json", "");
-    text = text.replace("```", "");
-    const respObj = JSON.parse(text);
-    return respObj;
+    return prompt;
 }
 
 
