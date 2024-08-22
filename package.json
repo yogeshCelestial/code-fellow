@@ -1,0 +1,21 @@
+{
+  "name": "code-fellow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "workspaces": [
+    "packages/cli",
+    "packages/client",
+    "packages/shared"
+  ],
+   "scripts": {
+    "build:cli": "npm run build --workspace packages/cli",
+    "build:client": "npm run build --workspace packages/client",
+    "build:all": "npm run build:cli && npm run build:client",
+    "start:cli": "npm start --workspace packages/cli",
+    "start:client": "npm start --workspace packages/client",
+    "link:cli": "npm run link --workspace packages/cli"
+  },
+  "author": "YOGESH",
+  "license": "MIT",
+  "description": ""
+}

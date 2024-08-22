@@ -1,0 +1,37 @@
+{
+  "name": "code-fellow",
+  "version": "1.0.0",
+  "description": "A CLI tool to test code quality in terms of security, performace and other aspects",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --watch",
+    "start": "node ./dist/index.js",
+    "link": "npm link"
+  },
+  "author": "YOGESH",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "code-fellow": "./dist/index.js"
+  },
+  "keywords": [
+    "code-fellow",
+    "code-quality",
+    "js-quality checker",
+    "openai",
+    "python quality checker"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.4.1",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.17.0",
+    "@types/underscore": "^1.11.15",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "underscore": "^1.13.7"
+  }
+}
