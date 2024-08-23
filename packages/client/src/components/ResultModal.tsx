@@ -18,7 +18,6 @@ const style = {
     width: '70vw',
     color: 'black',
     bgcolor:'whitesmoke',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 3,
 }

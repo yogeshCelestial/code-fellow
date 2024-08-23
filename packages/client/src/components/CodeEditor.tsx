@@ -4,12 +4,13 @@ import { Box, Button, Typography, useTheme } from '@mui/material';
 import { analyzeCode } from '../utils/ai-prompt';
 import _ from 'underscore';
 import { PropType, ScoreType } from '../App';
+import Loader from './Loader';
 
 type PrevState = {
   checkReport: string; qualityScores: ScoreType[]; suggestions: string;
 }
 const CodeEditor = (props: PropType) => {
-  const { setReport, setIsLoading } = props;
+  const { setReport, isLoading, setIsLoading } = props;
 
   const theme = useTheme();
   const [code, setCode] = useState('// Paste your code here');
@@ -84,6 +85,7 @@ const CodeEditor = (props: PropType) => {
         <Button variant='outlined' onClick={clearCode}>Clear</Button>
         <Button variant='contained' onClick={runTool}>Run Tool</Button>
       </Box>
+      <Loader open={isLoading} />
     </Box>
 
   );

@@ -19,7 +19,8 @@ export type PropType = {
     qualityScores: ScoreType[],
     suggestions: string
   }) => void;
-  setIsLoading: (loading: boolean) => void
+  isLoading: boolean,
+  setIsLoading: (isLoading: boolean) => void
 }
 
 export type initialType = {
@@ -40,8 +41,6 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
-  console.log(report);
-  console.log(isLoading);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,7 +57,7 @@ function App() {
         <CssBaseline />
         <div className="App">
           <ButtonAppBar />
-          <MainSection setReport={setReport} setIsLoading={setIsLoading} />
+          <MainSection setReport={setReport} isLoading={isLoading} setIsLoading={setIsLoading} />
           <ResultModal open={open} handleClose={handleClose} report={report} />
           <Footer />
         </div>
