@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { TextareaAutosize } from '@mui/base';
 import { Box, Button, useTheme } from '@mui/material';
+import { analyzeCode } from '../utils/ai-prompt';
+import _ from 'underscore';
+import { PropType, ScoreType } from '../App';
 
-const CodeEditor = () => {
+type PrevState = {
+  checkReport: string; qualityScores: ScoreType[]; suggestions: string;
+}
+const CodeEditor = (props: PropType) => {
+  const { setReport, setIsLoading } = props;
+
   const theme = useTheme();
   const [code, setCode] = useState('// Paste your code here');
 
@@ -14,8 +22,24 @@ const CodeEditor = () => {
     setCode('// Paste your code here');
   }
 
-  function runTool() {
-    // functionality here
+  async function runTool() {
+    setIsLoading(true);
+    const qualityReport = await analyzeCode(code);
+        const reportGroup = _.groupBy(qualityReport, 'section');
+        const checkReport = reportGroup?.['Check Report']?.[0].details;
+        const qualityScores = reportGroup?.['Quality Scores']?.[0].details
+        const suggestions = reportGroup?.['Suggestions for Improvements']?.[0].details;
+        if (checkReport && qualityReport && suggestions) {
+          setReport((prev: PrevState) => {
+            return {
+              ...prev,
+              checkReport,
+              qualityScores,
+              suggestions,
+            }
+          });
+        }
+        setIsLoading(false);
   }
 
   return (

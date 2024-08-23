@@ -1,8 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import CodeEditor from './CodeEditor';
+import { PropType } from '../App';
 
-const MainSection = () => {
+const MainSection = (props: PropType) => {
     return (
         <Box width='70%' m='auto'>
             <Box>
@@ -10,7 +11,7 @@ const MainSection = () => {
                     AI-Powered Code Quality Testing Tool
                 </Typography>
             </Box>
-            <CodeEditor />
+            <CodeEditor {...props} />
         </Box>
     )
 }
