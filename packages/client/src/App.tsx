@@ -4,6 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeColorContext } from './theme';
 import ButtonAppBar from './components/TopBar';
+import MainSection from './components/MainSection';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <CssBaseline />
         <div className="App">
           <ButtonAppBar />
+          <MainSection />
         </div>
       </ThemeProvider>
     </ThemeColorContext.Provider>

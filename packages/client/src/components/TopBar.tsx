@@ -17,7 +17,7 @@ export default function ButtonAppBar() {
         toggleColorMode();
     }
     return (
-        <Box display='flex' p="20px" justifyContent='space-between' width='100%'>
+        <Box display='flex' p="20px 40px" justifyContent='space-between' width='100%'>
             <Box>
                 {theme.palette.mode === 'dark' ? (
                     <img height='60px' width='220px' src={logoNoBG} alt='App Logo' />

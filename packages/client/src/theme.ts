@@ -3,6 +3,37 @@ import { createTheme, ThemeOptions } from '@mui/material/styles';
 import { createContext, useMemo, useState } from 'react';
 
 // Define light theme
+
+const typography = {
+    typography: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 12,
+    },
+    h1: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 40,
+    },
+    h2: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 32,
+    },
+    h3: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 24,
+    },
+    h4: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 20,
+    },
+    h5: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 16,
+    },
+    h6: {
+        fontFamily: ['Roboto', 'Sans-Sarif'].join(','),
+        fontSize: 14,
+    }
+}
 const lightTheme: ThemeOptions = {
     palette: {
         mode: 'light',
@@ -16,10 +47,7 @@ const lightTheme: ThemeOptions = {
             default: '#fafafa',
         },
     },
-    typography: {
-        fontFamily: 'Arial, sans-serif',
-    },
-    // Add more customizations if needed
+    ...typography
 };
 
 // Define dark theme
@@ -33,13 +61,10 @@ const darkTheme: ThemeOptions = {
             main: '#f48fb1',
         },
         background: {
-            default: '#121212',
+            default: '#26355D',
         },
     },
-    typography: {
-        fontFamily: 'Arial, sans-serif',
-    },
-    // Add more customizations if needed
+    ...typography
 };
 
 export const ThemeColorContext = createContext({
