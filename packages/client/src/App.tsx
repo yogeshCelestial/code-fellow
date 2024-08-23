@@ -6,7 +6,8 @@ import { ThemeColorContext } from './theme';
 import ButtonAppBar from './components/TopBar';
 import MainSection from './components/MainSection';
 import Footer from './components/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import ResultModal from './components/ResultModal';
 
 export type ScoreType = {
    metric: string,
@@ -37,9 +38,19 @@ function App() {
 
   const [report, setReport] = useState<initialType>(initial);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   console.log(report);
-  console.log(isLoading)
+  console.log(isLoading);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    if (report.checkReport && report.qualityScores?.length && report.suggestions) {
+      handleOpen();
+    };
+  }, [report]);
 
   return (
     <ThemeColorContext.Provider value={colorMode}>
@@ -48,6 +59,7 @@ function App() {
         <div className="App">
           <ButtonAppBar />
           <MainSection setReport={setReport} setIsLoading={setIsLoading} />
+          <ResultModal open={open} handleClose={handleClose} report={report} />
           <Footer />
         </div>
       </ThemeProvider>

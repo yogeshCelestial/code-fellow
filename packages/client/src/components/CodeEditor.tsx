@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextareaAutosize } from '@mui/base';
-import { Box, Button, useTheme } from '@mui/material';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import { analyzeCode } from '../utils/ai-prompt';
 import _ from 'underscore';
 import { PropType, ScoreType } from '../App';
@@ -25,21 +25,21 @@ const CodeEditor = (props: PropType) => {
   async function runTool() {
     setIsLoading(true);
     const qualityReport = await analyzeCode(code);
-        const reportGroup = _.groupBy(qualityReport, 'section');
-        const checkReport = reportGroup?.['Check Report']?.[0].details;
-        const qualityScores = reportGroup?.['Quality Scores']?.[0].details
-        const suggestions = reportGroup?.['Suggestions for Improvements']?.[0].details;
-        if (checkReport && qualityReport && suggestions) {
-          setReport((prev: PrevState) => {
-            return {
-              ...prev,
-              checkReport,
-              qualityScores,
-              suggestions,
-            }
-          });
+    const reportGroup = _.groupBy(qualityReport, 'section');
+    const checkReport = reportGroup?.['Check Report']?.[0].details;
+    const qualityScores = reportGroup?.['Quality Scores']?.[0].details
+    const suggestions = reportGroup?.['Suggestions for Improvements']?.[0].details;
+    if (checkReport && qualityReport && suggestions) {
+      setReport((prev: PrevState) => {
+        return {
+          ...prev,
+          checkReport,
+          qualityScores,
+          suggestions,
         }
-        setIsLoading(false);
+      });
+    }
+    setIsLoading(false);
   }
 
   return (
@@ -51,11 +51,15 @@ const CodeEditor = (props: PropType) => {
         '& .textAreaElement-001': {
           width: '80%',
           backgroundColor: theme.palette.mode === 'dark' ? '#222831' : 'whitesmoke',
-          borderRadius: '12px',
+          border: `2px solid ${theme.palette.mode === 'dark' ? 'white' : 'black'}`,
+          borderRadius: '2px',
           color: theme.palette.mode === 'dark' ? 'white' : 'black'
         }
       }}
     >
+      <Box width='80%' textAlign='left' m='10px auto 5px'>
+        <Typography> Paste Code in below box or drop files here...</Typography>
+      </Box>
       <Box>
         <TextareaAutosize
           minRows={20}
